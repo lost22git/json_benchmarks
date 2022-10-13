@@ -26,9 +26,9 @@ subprojects {
 
   dependencies {
     // log
-    compileOnly(libs.slf4j)
+    // compileOnly(libs.slf4j)
     // test
-    testRuntimeOnly(libs.logback)
+    // testRuntimeOnly(libs.logback)
     testImplementation(libs.easyrandom.core)
   }
 
