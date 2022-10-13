@@ -1,0 +1,67 @@
+plugins {
+  alias(libs.plugins.jmh)
+  alias(libs.plugins.jmhReport)
+  alias(libs.plugins.micronaut)
+}
+
+dependencies {
+  // JMH
+  jmh(libs.bundles.jmh)
+  // Jackson
+  implementation(libs.bundles.jackson)
+  // Jsoniter
+  implementation(libs.jsoniter)
+  runtimeOnly(libs.javassist)
+  // FastJson
+  implementation(libs.fastjson)
+  // Gson
+  implementation(libs.gson)
+  // Moshi
+  implementation(libs.moshi)
+  // Yasson
+  compileOnly(libs.jsonb)
+  runtimeOnly(libs.yasson)
+  // Micronaut Serialization
+  implementation("io.micronaut:micronaut-runtime")
+  annotationProcessor("io.micronaut.serde:micronaut-serde-processor")
+  implementation("io.micronaut.serde:micronaut-serde-jackson")
+}
+
+// Micronaut Serialization
+def versionCatalog = extensions.getByType(VersionCatalogsExtension).named("libs")
+def micronautVersion = versionCatalog.findVersion("micronaut").get()
+micronaut {
+  version(micronautVersion.toString())
+  processing {
+    incremental(true)
+    annotations("org.example.*")
+    sourceSets(
+      sourceSets.jmh  // process jmh sources
+    )
+  }
+}
+
+def jvm_args = [
+  "--add-opens",
+  "java.base/java.lang=ALL-UNNAMED"
+]
+
+jmh {
+  resultFormat.set("JSON")
+  jvmArgsAppend = jvm_args
+}
+
+jmhReport {
+  jmhResultPath = project.file('build/results/jmh/results.json')
+  jmhReportOutput = project.file('build/results/jmh')
+}
+
+tasks.jmh.finalizedBy tasks.jmhReport
+
+tasks.withType(JavaCompile).configureEach {
+  options.compilerArgs += jvm_args
+}
+
+tasks.withType(JavaExec).configureEach {
+  jvmArgs = jvm_args
+}

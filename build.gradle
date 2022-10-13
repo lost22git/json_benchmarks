@@ -1,0 +1,42 @@
+plugins {
+  id("groovy")
+  alias(libs.plugins.taskinfo)
+}
+
+allprojects {
+  group = "org.example"
+  version = "1.0.0"
+
+  repositories {
+    mavenLocal()
+    mavenCentral()
+  }
+}
+
+subprojects {
+
+  apply {
+    plugin("groovy")
+  }
+
+  java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+  }
+
+  dependencies {
+    // log
+    compileOnly(libs.slf4j)
+    // test
+    testRuntimeOnly(libs.logback)
+    testImplementation(libs.easyrandom.core)
+  }
+
+  tasks.compileJava {
+    options.encoding = "UTF-8"
+    options.compilerArgs.add("-parameters")
+    // use the project's version or define one directly
+    options.javaModuleVersion = provider { project.version }
+  }
+
+}

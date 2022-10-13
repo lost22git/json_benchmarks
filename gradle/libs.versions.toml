@@ -1,0 +1,122 @@
+[versions]
+########################### Libraries version
+slf4j = "2.0.0"
+logback = "1.2.11"
+jmh = "1.35"
+easyrandom = "5.0.0"
+
+# Jackson
+jackson = "2.13.4"
+
+# Jsoniter
+jsoniter = "0.9.23"
+javassist = "3.21.0-GA"
+
+# FastJson
+fastjson = "1.2.76"
+
+# Gson
+gson = "2.9.1"
+
+# Moshi
+moshi = "1.14.0"
+
+# Yasson
+yasson = "3.0.2"
+jsonb = "3.0.0"
+
+# Micronaut
+micronaut = "3.7.1"
+micronaut-plugin = "3.6.2"
+
+
+########################### Plugins version
+plugin-taskinfo = "1.4.0"
+plugin-jmh = "0.6.8"
+plugin-jmhReport = "0.9.0"
+
+
+########################### Bundles
+[bundles]
+jmh = ["jmh-core", "jmh-generator-annprocess"]
+jackson = ["jackson-annotations", "jackson-jsr310"]
+
+
+########################### Libraries
+[libraries.slf4j]
+module = "org.slf4j:slf4j-api"
+version.ref = "slf4j"
+
+[libraries.logback]
+module = "ch.qos.logback:logback-classic"
+version.ref = "logback"
+
+[libraries.jmh-core]
+module = "org.openjdk.jmh:jmh-core"
+version.ref = "jmh"
+
+[libraries.jmh-generator-annprocess]
+module = "org.openjdk.jmh:jmh-generator-annprocess"
+version.ref = "jmh"
+
+[libraries.easyrandom-core]
+module = "org.jeasy:easy-random-core"
+version.ref = "easyrandom"
+
+[libraries.jackson-annotations]
+module = "com.fasterxml.jackson.core:jackson-annotations"
+version.ref = "jackson"
+
+[libraries.jackson-jsr310]
+module = "com.fasterxml.jackson.datatype:jackson-datatype-jsr310"
+version.ref = "jackson"
+
+[libraries.jsoniter]
+module = "com.jsoniter:jsoniter"
+version.ref = "jsoniter"
+
+[libraries.javassist]
+module = "org.javassist:javassist"
+version.ref = "javassist"
+
+[libraries.fastjson]
+module = "com.alibaba:fastjson"
+version.ref = "fastjson"
+
+[libraries.gson]
+module = "com.google.code.gson:gson"
+version.ref = "gson"
+
+[libraries.moshi]
+module = "com.squareup.moshi:moshi"
+version.ref = "moshi"
+
+[libraries.yasson]
+module = "org.eclipse:yasson"
+version.ref = "yasson"
+
+[libraries.jsonb]
+module = "jakarta.json.bind:jakarta.json.bind-api"
+version.ref = "jsonb"
+
+
+########################### Plugins
+[plugins.taskinfo]
+id = "org.barfuin.gradle.taskinfo"
+version.ref = "plugin-taskinfo"
+
+[plugins.jmh]
+id = "me.champeau.jmh"
+version.ref = "plugin-jmh"
+
+[plugins.jmhReport]
+id = "io.morethan.jmhreport"
+version.ref = "plugin-jmhReport"
+
+# Micronaut plugin
+[plugins.micronaut]
+id = "io.micronaut.library"
+version.ref = "micronaut-plugin"
+
+
+[metadata]
