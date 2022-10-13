@@ -35,17 +35,8 @@ jobs:
       with:
         arguments: jmh
         
-    - name: Zip Release
-      uses: TheDoctor0/zip-release@0.6.2
-      with:
-        # Filename for archive
-        filename: 'jmh.result.html.zip'
-        # Base path for archive files
-        path: 'app/build/results/jmh'
-        
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v3.1.0
       with:
-        # Artifact name
-        name: 'jmh.result.html.zip'
-        path: 'jmh.result.html.zip'
+        name: 'jmh.result.html'
+        path: 'app/build/results/jmh'
