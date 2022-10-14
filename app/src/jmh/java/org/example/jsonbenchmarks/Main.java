@@ -89,14 +89,12 @@ public class Main {
 
     @Benchmark
     public void jackson_serialize(Blackhole blackhole) throws JsonProcessingException {
-        var json = JACKSON.writeValueAsString(USER);
-        blackhole.consume(json);
+        blackhole.consume(JACKSON.writeValueAsString(USER));
     }
 
     @Benchmark
     public void jackson_deserialize(Blackhole blackhole) throws JsonProcessingException {
-        var user = JACKSON.readValue(JSON, User.class);
-        blackhole.consume(user);
+        blackhole.consume(JACKSON.readValue(JSON, User.class));
     }
 
     // ============== Jsoniter reflect_mode
@@ -109,14 +107,12 @@ public class Main {
 
     @Benchmark
     public void jsoniter_reflect_mode_serialize(Blackhole blackhole) {
-        var json = JsonStream.serialize(JSONITER_REFLECT_MODE_CONFIG, USER);
-        blackhole.consume(json);
+        blackhole.consume(JsonStream.serialize(JSONITER_REFLECT_MODE_CONFIG, USER));
     }
 
     @Benchmark
     public void jsoniter_reflect_mode_deserialize(Blackhole blackhole) {
-        var user = JsonIterator.deserialize(JSONITER_REFLECT_MODE_CONFIG, JSON, User.class);
-        blackhole.consume(user);
+        blackhole.consume(JsonIterator.deserialize(JSONITER_REFLECT_MODE_CONFIG, JSON, User.class));
     }
 
     // ============== Jsoniter dynamic_mode
@@ -129,14 +125,12 @@ public class Main {
 
     @Benchmark
     public void jsoniter_dyn_mode_serialize(Blackhole blackhole) {
-        var json = JsonStream.serialize(JSONITER_DYN_MODE_CONFIG, USER);
-        blackhole.consume(json);
+        blackhole.consume(JsonStream.serialize(JSONITER_DYN_MODE_CONFIG, USER));
     }
 
     @Benchmark
     public void jsoniter_dyn_mode_deserialize(Blackhole blackhole) {
-        var user = JsonIterator.deserialize(JSONITER_DYN_MODE_CONFIG, JSON, User.class);
-        blackhole.consume(user);
+        blackhole.consume(JsonIterator.deserialize(JSONITER_DYN_MODE_CONFIG, JSON, User.class));
     }
 
     // ============== FastJson
@@ -147,86 +141,74 @@ public class Main {
     @Benchmark
     public void fastjson_serialize(Blackhole blackhole) {
         // var json = com.alibaba.fastjson.JSON.toJSONString(USER, FASTJSON_SER_CONFIG);
-        var json = com.alibaba.fastjson.JSON.toJSONString(USER);
-        blackhole.consume(json);
+        blackhole.consume(com.alibaba.fastjson.JSON.toJSONString(USER));
     }
 
     @Benchmark
     public void fastjson_deserialize(Blackhole blackhole) {
         // var user = com.alibaba.fastjson.JSON.parseObject(JSON, User.class,
         // FAST_DESER_CONFIG);
-        var user = com.alibaba.fastjson.JSON.parseObject(JSON, User.class);
-        blackhole.consume(user);
+        blackhole.consume(com.alibaba.fastjson.JSON.parseObject(JSON, User.class));
     }
 
     // ============== Gson
 
     @Benchmark
     public void gson_serialize(Blackhole blackhole) {
-        var json = GSON.toJson(USER);
-        blackhole.consume(json);
+        blackhole.consume(GSON.toJson(USER));
     }
 
     @Benchmark
     public void gson_deserialize(Blackhole blackhole) {
-        var user = GSON.fromJson(JSON, User.class);
-        blackhole.consume(user);
+        blackhole.consume(GSON.fromJson(JSON, User.class));
     }
 
     // ============== Moshi
 
     @Benchmark
     public void moshi_serialize(Blackhole blackhole) {
-        var json = MOSHI.toJson(USER);
-        blackhole.consume(json);
+        blackhole.consume(MOSHI.toJson(USER));
     }
 
     @Benchmark
     public void moshi_deserialize(Blackhole blackhole) throws IOException {
-        var user = MOSHI.fromJson(JSON);
-        blackhole.consume(user);
+        blackhole.consume(MOSHI.fromJson(JSON));
     }
 
     // ============== Yasson
 
     @Benchmark
     public void yasson_serialize(Blackhole blackhole) {
-        var json = YASSON.toJson(USER);
-        blackhole.consume(json);
+        blackhole.consume(YASSON.toJson(USER));
     }
 
     @Benchmark
     public void yasson_deserialize(Blackhole blackhole) throws IOException {
-        var user = YASSON.fromJson(JSON, User.class);
-        blackhole.consume(user);
+        blackhole.consume(YASSON.fromJson(JSON, User.class));
     }
 
     // ============== Micronaut serde jackson
 
     @Benchmark
     public void mn_serialize(Blackhole blackhole) throws JsonProcessingException {
-        var json = MN_SERDE.writeValueAsString(USER);
-        blackhole.consume(json);
+        blackhole.consume(MN_SERDE.writeValueAsString(USER));
     }
 
     @Benchmark
     public void mn_deserialize(Blackhole blackhole) throws JsonProcessingException {
-        var user = MN_SERDE.readValue(JSON, User.class);
-        blackhole.consume(user);
+        blackhole.consume(MN_SERDE.readValue(JSON, User.class));
     }
 
     // ============== Qson
 
     @Benchmark
     public void qson_serialize(Blackhole blackhole) {
-        var json = QSON.writeString(USER);
-        blackhole.consume(json);
+        blackhole.consume(QSON.writeString(USER));
     }
 
     @Benchmark
     public void qson_deserialize(Blackhole blackhole) {
-        var user = QSON.read(JSON, User.class);
-        blackhole.consume(user);
+        blackhole.consume(QSON.read(JSON, User.class));
     }
 
 
