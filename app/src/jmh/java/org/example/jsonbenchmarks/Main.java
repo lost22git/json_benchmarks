@@ -14,6 +14,7 @@ import com.jsoniter.spi.DecodingMode;
 import com.squareup.moshi.JsonAdapter;
 import com.squareup.moshi.Moshi;
 import io.micronaut.context.ApplicationContext;
+import io.quarkus.qson.generator.QsonMapper;
 import jakarta.json.bind.Jsonb;
 import jakarta.json.bind.JsonbBuilder;
 import org.jeasy.random.EasyRandom;
@@ -30,7 +31,7 @@ import java.util.concurrent.TimeUnit;
 
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
-@Warmup(iterations = 3, time = 5)
+@Warmup(iterations = 5, time = 3)
 @Measurement(iterations = 3, time = 3)
 @Fork(1)
 @Threads(4)
@@ -50,6 +51,8 @@ public class Main {
 
     static ObjectMapper MN_SERDE;
 
+    static QsonMapper QSON;
+
     static {
         JACKSON = new ObjectMapper()
             .disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);
@@ -64,6 +67,7 @@ public class Main {
         MN_SERDE = ApplicationContext.run().getBean(ObjectMapper.class)
             .disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);
 
+        QSON = new QsonMapper();
 
         var params = new EasyRandomParameters()
             .objectPoolSize(100)
@@ -210,6 +214,21 @@ public class Main {
         var user = MN_SERDE.readValue(JSON, User.class);
         blackhole.consume(user);
     }
+
+    // ============== Qson
+
+    @Benchmark
+    public void qson_serialize(Blackhole blackhole) {
+        var json = QSON.writeString(USER);
+        blackhole.consume(json);
+    }
+
+    @Benchmark
+    public void qson_deserialize(Blackhole blackhole) {
+        var user = QSON.read(JSON, User.class);
+        blackhole.consume(user);
+    }
+
 
     public static void main(String[] args) throws RunnerException {
         final Options options = new OptionsBuilder().include(Main.class.getName()).build();

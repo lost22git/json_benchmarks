@@ -29,6 +29,8 @@ jsonb = "3.0.0"
 micronaut = "3.7.1"
 micronaut-plugin = "3.6.2"
 
+# Qson
+qson = "1.1.1.Final"
 
 ########################### Plugins version
 plugin-taskinfo = "1.4.0"
@@ -40,6 +42,7 @@ plugin-jmhReport = "0.9.0"
 [bundles]
 jmh = ["jmh-core", "jmh-generator-annprocess"]
 jackson = ["jackson-annotations", "jackson-jsr310"]
+qson = ["qson-core","qson-generator"]
 
 
 ########################### Libraries
@@ -99,6 +102,13 @@ version.ref = "yasson"
 module = "jakarta.json.bind:jakarta.json.bind-api"
 version.ref = "jsonb"
 
+[libraries.qson-core]
+module = "io.quarkus.qson:qson-core"
+version.ref = "qson"
+
+[libraries.qson-generator]
+module = "io.quarkus.qson:qson-generator"
+version.ref = "qson"
 
 ########################### Plugins
 [plugins.taskinfo]

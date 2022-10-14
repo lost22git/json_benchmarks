@@ -13,6 +13,7 @@ import com.jsoniter.spi.DecodingMode;
 import com.squareup.moshi.JsonAdapter;
 import com.squareup.moshi.Moshi;
 import io.micronaut.context.ApplicationContext;
+import io.quarkus.qson.generator.QsonMapper;
 import jakarta.json.bind.JsonbBuilder;
 import org.jeasy.random.EasyRandom;
 import org.jeasy.random.EasyRandomParameters;
@@ -37,6 +38,8 @@ public class TestMain {
         testYasson();
         System.out.println("---------------------- Micronaut Serialization");
         testMnSerde();
+        System.out.println("---------------------- Qson");
+        testQson();
 
     }
 
@@ -163,6 +166,22 @@ public class TestMain {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private static void testQson() {
+
+        var user = randomUser();
+
+        var mapper = new QsonMapper();
+
+        var json = mapper.writeString(user);
+
+        System.out.println("json = \n" + json);
+
+        var deser_user = mapper.read(json, User.class);
+
+        System.out.println("deser_user = \n" + deser_user);
+
     }
 
     private static User randomUser() {
