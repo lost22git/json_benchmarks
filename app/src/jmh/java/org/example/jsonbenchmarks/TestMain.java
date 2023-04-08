@@ -12,6 +12,7 @@ import com.jsoniter.spi.Config;
 import com.jsoniter.spi.DecodingMode;
 import com.squareup.moshi.JsonAdapter;
 import com.squareup.moshi.Moshi;
+import io.avaje.jsonb.Jsonb;
 import io.micronaut.context.ApplicationContext;
 import io.quarkus.qson.generator.QsonMapper;
 import jakarta.json.bind.JsonbBuilder;
@@ -22,6 +23,7 @@ import java.io.IOException;
 
 public class TestMain {
 
+    // --add-opens java.base/java.lang=ALL-UNNAMED
     public static void main(String[] args) throws Exception {
 
         System.out.println("---------------------- Jackson");
@@ -40,8 +42,11 @@ public class TestMain {
         testMnSerde();
         System.out.println("---------------------- Qson");
         testQson();
+        System.out.println("---------------------- Avaje jsonb");
+        testAvajeJsonb();
 
     }
+
 
     private static void testJackson() throws JsonProcessingException {
         var user = randomUser();
@@ -184,6 +189,23 @@ public class TestMain {
 
     }
 
+    private static void testAvajeJsonb() {
+
+        var user = randomUser();
+
+        var jsonb = Jsonb.builder().build();
+        var jsonType = jsonb.type(User.class);
+
+        var json = jsonType.toJson(user);
+
+        System.out.println("json = \n" + json);
+
+        var deser_user = jsonType.fromJson(json);
+
+        System.out.println("deser_user = \n" + deser_user);
+
+    }
+
     private static User randomUser() {
         var params = new EasyRandomParameters()
             .objectPoolSize(100)
@@ -193,4 +215,5 @@ public class TestMain {
         var user = easyRandom.nextObject(User.class);
         return user;
     }
+
 }

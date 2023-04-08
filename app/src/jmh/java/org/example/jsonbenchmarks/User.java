@@ -1,11 +1,13 @@
 package org.example.jsonbenchmarks;
 
+import io.avaje.jsonb.Json;
 import io.micronaut.serde.annotation.Serdeable;
 
 import java.util.Map;
 import java.util.Set;
 
 @Serdeable
+@Json
 public class User {
     private Long id;
     private String firstName;
@@ -42,14 +44,14 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-            "id=" + id +
-            ", firstName='" + firstName + '\'' +
-            ", lastName='" + lastName + '\'' +
-            ", age=" + age +
-            ", gender=" + gender +
-            ", friends=" + friends +
-            ", attrs=" + attrs +
-            '}';
+               "id=" + id +
+               ", firstName='" + firstName + '\'' +
+               ", lastName='" + lastName + '\'' +
+               ", age=" + age +
+               ", gender=" + gender +
+               ", friends=" + friends +
+               ", attrs=" + attrs +
+               '}';
     }
 
     public Long getId() {

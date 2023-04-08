@@ -1,132 +1,64 @@
 [versions]
-########################### Libraries version
-slf4j = "2.0.0"
-logback = "1.2.11"
-jmh = "1.35"
+avaje-jsonb = "1.4"
 easyrandom = "5.0.0"
-
-# Jackson
-jackson = "2.13.4"
-
-# Jsoniter
-jsoniter = "0.9.23"
-javassist = "3.21.0-GA"
-
-# FastJson
-fastjson = "1.2.76"
-
-# Gson
-gson = "2.9.1"
-
-# Moshi
-moshi = "1.14.0"
-
-# Yasson
-yasson = "3.0.2"
+fastjson = "2.0.27"
+gson = "2.10.1"
+jackson = "2.15.0-rc2"
+javassist = "3.29.2-GA"
+jmh = "1.36"
 jsonb = "3.0.0"
-
-# Micronaut
-micronaut = "3.7.1"
-micronaut-plugin = "3.6.2"
-
-# Qson
-qson = "1.1.1.Final"
-
-########################### Plugins version
-plugin-taskinfo = "1.4.0"
-plugin-jmh = "0.6.8"
+jsoniter = "0.9.23"
+logback = "1.2.11"
+micronaut = "3.8.8"
+micronaut-plugin = "3.7.7"
+moshi = "1.14.0"
+plugin-jmh = "0.7.0"
 plugin-jmhReport = "0.9.0"
+plugin-version-catalog-update = "0.8.0"
+plugin-versions = "0.46.0"
+qson = "1.1.1.Final"
+slf4j = "2.0.0"
+yasson = "3.0.3"
 
+[libraries]
+avaje-jsonb = { module = "io.avaje:avaje-jsonb", version.ref = "avaje-jsonb" }
+avaje-jsonb-generator = { module = "io.avaje:avaje-jsonb-generator", version.ref = "avaje-jsonb" }
+easyrandom-core = { module = "org.jeasy:easy-random-core", version.ref = "easyrandom" }
+fastjson = { module = "com.alibaba:fastjson", version.ref = "fastjson" }
+gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
+jackson-annotations = { module = "com.fasterxml.jackson.core:jackson-annotations", version.ref = "jackson" }
+jackson-jsr310 = { module = "com.fasterxml.jackson.datatype:jackson-datatype-jsr310", version.ref = "jackson" }
+javassist = { module = "org.javassist:javassist", version.ref = "javassist" }
+jmh-core = { module = "org.openjdk.jmh:jmh-core", version.ref = "jmh" }
+jmh-generator-annprocess = { module = "org.openjdk.jmh:jmh-generator-annprocess", version.ref = "jmh" }
+jsonb = { module = "jakarta.json.bind:jakarta.json.bind-api", version.ref = "jsonb" }
+jsoniter = { module = "com.jsoniter:jsoniter", version.ref = "jsoniter" }
+logback = { module = "ch.qos.logback:logback-classic", version.ref = "logback" }
+moshi = { module = "com.squareup.moshi:moshi", version.ref = "moshi" }
+qson-core = { module = "io.quarkus.qson:qson-core", version.ref = "qson" }
+qson-generator = { module = "io.quarkus.qson:qson-generator", version.ref = "qson" }
+slf4j = { module = "org.slf4j:slf4j-api", version.ref = "slf4j" }
+yasson = { module = "org.eclipse:yasson", version.ref = "yasson" }
 
 ########################### Bundles
 [bundles]
-jmh = ["jmh-core", "jmh-generator-annprocess"]
-jackson = ["jackson-annotations", "jackson-jsr310"]
-qson = ["qson-core","qson-generator"]
-
-
-########################### Libraries
-[libraries.slf4j]
-module = "org.slf4j:slf4j-api"
-version.ref = "slf4j"
-
-[libraries.logback]
-module = "ch.qos.logback:logback-classic"
-version.ref = "logback"
-
-[libraries.jmh-core]
-module = "org.openjdk.jmh:jmh-core"
-version.ref = "jmh"
-
-[libraries.jmh-generator-annprocess]
-module = "org.openjdk.jmh:jmh-generator-annprocess"
-version.ref = "jmh"
-
-[libraries.easyrandom-core]
-module = "org.jeasy:easy-random-core"
-version.ref = "easyrandom"
-
-[libraries.jackson-annotations]
-module = "com.fasterxml.jackson.core:jackson-annotations"
-version.ref = "jackson"
-
-[libraries.jackson-jsr310]
-module = "com.fasterxml.jackson.datatype:jackson-datatype-jsr310"
-version.ref = "jackson"
-
-[libraries.jsoniter]
-module = "com.jsoniter:jsoniter"
-version.ref = "jsoniter"
-
-[libraries.javassist]
-module = "org.javassist:javassist"
-version.ref = "javassist"
-
-[libraries.fastjson]
-module = "com.alibaba:fastjson"
-version.ref = "fastjson"
-
-[libraries.gson]
-module = "com.google.code.gson:gson"
-version.ref = "gson"
-
-[libraries.moshi]
-module = "com.squareup.moshi:moshi"
-version.ref = "moshi"
-
-[libraries.yasson]
-module = "org.eclipse:yasson"
-version.ref = "yasson"
-
-[libraries.jsonb]
-module = "jakarta.json.bind:jakarta.json.bind-api"
-version.ref = "jsonb"
-
-[libraries.qson-core]
-module = "io.quarkus.qson:qson-core"
-version.ref = "qson"
-
-[libraries.qson-generator]
-module = "io.quarkus.qson:qson-generator"
-version.ref = "qson"
+jackson = [
+    "jackson-annotations",
+    "jackson-jsr310",
+]
+jmh = [
+    "jmh-core",
+    "jmh-generator-annprocess",
+]
+qson = [
+    "qson-core",
+    "qson-generator",
+]
 
 ########################### Plugins
-[plugins.taskinfo]
-id = "org.barfuin.gradle.taskinfo"
-version.ref = "plugin-taskinfo"
-
-[plugins.jmh]
-id = "me.champeau.jmh"
-version.ref = "plugin-jmh"
-
-[plugins.jmhReport]
-id = "io.morethan.jmhreport"
-version.ref = "plugin-jmhReport"
-
-# Micronaut plugin
-[plugins.micronaut]
-id = "io.micronaut.library"
-version.ref = "micronaut-plugin"
-
-
-[metadata]
+[plugins]
+jmh = { id = "me.champeau.jmh", version.ref = "plugin-jmh" }
+jmhReport = { id = "io.morethan.jmhreport", version.ref = "plugin-jmhReport" }
+micronaut = { id = "io.micronaut.library", version.ref = "micronaut-plugin" }
+version-catalog-update = { id = "nl.littlerobots.version-catalog-update", version.ref = "plugin-version-catalog-update" }
+versions = { id = "com.github.ben-manes.versions", version.ref = "plugin-versions" }

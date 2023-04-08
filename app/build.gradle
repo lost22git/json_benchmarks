@@ -4,6 +4,7 @@ plugins {
   alias(libs.plugins.micronaut)
 }
 
+
 dependencies {
   // JMH
   jmh(libs.bundles.jmh)
@@ -27,6 +28,9 @@ dependencies {
   implementation("io.micronaut.serde:micronaut-serde-jackson")
   // Qson
   implementation(libs.bundles.qson)
+  // Avaje json
+  implementation(libs.avaje.jsonb)
+  annotationProcessor(libs.avaje.jsonb.generator)
 }
 
 // Micronaut Serialization
@@ -43,12 +47,22 @@ micronaut {
   }
 }
 
+def javac_args = [
+  "--add-opens",
+  "java.base/java.lang=ALL-UNNAMED"
+]
+
 def jvm_args = [
+  "-XX:+UnlockExperimentalVMOptions",
+  "-XX:+UseZGC",
+  '-Xms2048m',
+  '-Xmx2048m',
   "--add-opens",
   "java.base/java.lang=ALL-UNNAMED"
 ]
 
 jmh {
+  profilers = ['gc', 'stack']
   resultFormat.set("JSON")
   jvmArgsAppend = jvm_args
 }
@@ -61,7 +75,7 @@ jmhReport {
 tasks.jmh.finalizedBy tasks.jmhReport
 
 tasks.withType(JavaCompile).configureEach {
-  options.compilerArgs += jvm_args
+  options.compilerArgs += javac_args
 }
 
 tasks.withType(JavaExec).configureEach {

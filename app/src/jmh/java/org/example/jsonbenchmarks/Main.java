@@ -13,6 +13,7 @@ import com.jsoniter.spi.Config;
 import com.jsoniter.spi.DecodingMode;
 import com.squareup.moshi.JsonAdapter;
 import com.squareup.moshi.Moshi;
+import io.avaje.jsonb.JsonType;
 import io.micronaut.context.ApplicationContext;
 import io.quarkus.qson.generator.QsonMapper;
 import jakarta.json.bind.Jsonb;
@@ -53,6 +54,8 @@ public class Main {
 
     static QsonMapper QSON;
 
+    static JsonType<User> AVAJE_JSONB;
+
     static {
         JACKSON = new ObjectMapper()
             .disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);
@@ -68,6 +71,8 @@ public class Main {
             .disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);
 
         QSON = new QsonMapper();
+
+//        AVAJE_JSONB = io.avaje.jsonb.Jsonb.builder().build().type(User.class);
 
         var params = new EasyRandomParameters()
             .objectPoolSize(100)
@@ -211,6 +216,16 @@ public class Main {
         blackhole.consume(QSON.read(JSON, User.class));
     }
 
+//    // ============== Avaje jsonb
+//    @Benchmark
+//    public void avaje_jsonb_serialize(Blackhole blackhole) {
+//        blackhole.consume(AVAJE_JSONB.toJson(USER));
+//    }
+//
+//    @Benchmark
+//    public void avaje_jsonb_deserialize(Blackhole blackhole) {
+//        blackhole.consume(AVAJE_JSONB.fromJson(JSON));
+//    }
 
     public static void main(String[] args) throws RunnerException {
         final Options options = new OptionsBuilder().include(Main.class.getName()).build();
