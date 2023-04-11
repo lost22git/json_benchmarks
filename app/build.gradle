@@ -30,7 +30,7 @@ dependencies {
   implementation(libs.bundles.qson)
   // Avaje json
   implementation(libs.avaje.jsonb)
-  annotationProcessor(libs.avaje.jsonb.generator)
+  jmhAnnotationProcessor(libs.avaje.jsonb.generator)
 }
 
 // Micronaut Serialization

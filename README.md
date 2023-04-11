@@ -11,6 +11,7 @@ Java Json library benchmarks
 - [Jsoniter](https://github.com/json-iterator/java)
 - [Yasson](https://github.com/eclipse-ee4j/yasson)
 - [Micronaut Serialization Jackson](https://github.com/micronaut-projects/micronaut-serialization)
+- [Avaje-Jsonb](https://github.com/avaje/avaje-jsonb)
 
 See [Libraries version](https://github.com/lost22git/json_benchmarks/blob/main/gradle/libs.versions.toml)
 

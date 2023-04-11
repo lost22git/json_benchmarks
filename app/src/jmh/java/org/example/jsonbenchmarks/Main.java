@@ -72,7 +72,7 @@ public class Main {
 
         QSON = new QsonMapper();
 
-//        AVAJE_JSONB = io.avaje.jsonb.Jsonb.builder().build().type(User.class);
+        AVAJE_JSONB = io.avaje.jsonb.Jsonb.builder().build().type(User.class);
 
         var params = new EasyRandomParameters()
             .objectPoolSize(100)
@@ -216,16 +216,16 @@ public class Main {
         blackhole.consume(QSON.read(JSON, User.class));
     }
 
-//    // ============== Avaje jsonb
-//    @Benchmark
-//    public void avaje_jsonb_serialize(Blackhole blackhole) {
-//        blackhole.consume(AVAJE_JSONB.toJson(USER));
-//    }
-//
-//    @Benchmark
-//    public void avaje_jsonb_deserialize(Blackhole blackhole) {
-//        blackhole.consume(AVAJE_JSONB.fromJson(JSON));
-//    }
+    // ============== Avaje jsonb
+    @Benchmark
+    public void avaje_jsonb_serialize(Blackhole blackhole) {
+        blackhole.consume(AVAJE_JSONB.toJson(USER));
+    }
+
+    @Benchmark
+    public void avaje_jsonb_deserialize(Blackhole blackhole) {
+        blackhole.consume(AVAJE_JSONB.fromJson(JSON));
+    }
 
     public static void main(String[] args) throws RunnerException {
         final Options options = new OptionsBuilder().include(Main.class.getName()).build();
