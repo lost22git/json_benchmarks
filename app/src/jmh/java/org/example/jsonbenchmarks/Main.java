@@ -11,9 +11,7 @@ import com.jsoniter.output.EncodingMode;
 import com.jsoniter.output.JsonStream;
 import com.jsoniter.spi.Config;
 import com.jsoniter.spi.DecodingMode;
-import com.squareup.moshi.JsonAdapter;
 import com.squareup.moshi.Moshi;
-import io.avaje.jsonb.JsonType;
 import io.micronaut.context.ApplicationContext;
 import io.quarkus.qson.generator.QsonMapper;
 import jakarta.json.bind.Jsonb;
@@ -42,7 +40,7 @@ public class Main {
 
     static Gson GSON;
 
-    static JsonAdapter<User> MOSHI;
+    static Moshi MOSHI;
 
     static Jsonb YASSON;
 
@@ -54,7 +52,7 @@ public class Main {
 
     static QsonMapper QSON;
 
-    static JsonType<User> AVAJE_JSONB;
+    static io.avaje.jsonb.Jsonb AVAJE_JSONB;
 
     static {
         JACKSON = new ObjectMapper()
@@ -62,8 +60,7 @@ public class Main {
 
         GSON = new Gson();
 
-        MOSHI = new Moshi.Builder().build()
-            .adapter(User.class);
+        MOSHI = new Moshi.Builder().build();
 
         YASSON = JsonbBuilder.create();
 
@@ -72,7 +69,7 @@ public class Main {
 
         QSON = new QsonMapper();
 
-        AVAJE_JSONB = io.avaje.jsonb.Jsonb.builder().build().type(User.class);
+        AVAJE_JSONB = io.avaje.jsonb.Jsonb.builder().build();
 
         var params = new EasyRandomParameters()
             .objectPoolSize(100)
@@ -172,12 +169,12 @@ public class Main {
 
     @Benchmark
     public void moshi_serialize(Blackhole blackhole) {
-        blackhole.consume(MOSHI.toJson(USER));
+        blackhole.consume(MOSHI.adapter(User.class).toJson(USER));
     }
 
     @Benchmark
     public void moshi_deserialize(Blackhole blackhole) throws IOException {
-        blackhole.consume(MOSHI.fromJson(JSON));
+        blackhole.consume(MOSHI.adapter(User.class).fromJson(JSON));
     }
 
     // ============== Yasson
@@ -219,12 +216,12 @@ public class Main {
     // ============== Avaje jsonb
     @Benchmark
     public void avaje_jsonb_serialize(Blackhole blackhole) {
-        blackhole.consume(AVAJE_JSONB.toJson(USER));
+        blackhole.consume(AVAJE_JSONB.type(User.class).toJson(USER));
     }
 
     @Benchmark
     public void avaje_jsonb_deserialize(Blackhole blackhole) {
-        blackhole.consume(AVAJE_JSONB.fromJson(JSON));
+        blackhole.consume(AVAJE_JSONB.type(User.class).fromJson(JSON));
     }
 
     public static void main(String[] args) throws RunnerException {
