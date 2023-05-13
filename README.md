@@ -21,7 +21,7 @@ Run the command: `.\gradlew clean && .\gradlew jmh`
 
 ## Check the jmh result
 
-Open `app/build/results/jmh/index.html` in web browser to check the jmh result
+Open `app/build/results/jmh/index.html` in web browser to check the jmh result.
 
 ## Github Action
 
