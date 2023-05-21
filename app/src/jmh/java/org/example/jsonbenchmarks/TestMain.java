@@ -32,6 +32,8 @@ public class TestMain {
         testJsoniter();
         System.out.println("---------------------- FastJson");
         testFastJson();
+        System.out.println("---------------------- FastJson2");
+        testFastJson2();
         System.out.println("---------------------- Gson");
         testGson();
         System.out.println("---------------------- Moshi");
@@ -103,6 +105,18 @@ public class TestMain {
 
         // var deser_user = JSON.parseObject(json, User.class, new ParserConfig(true));
         var deser_user = JSON.parseObject(json, User.class);
+
+        System.out.println("deser_user = \n" + deser_user);
+    }
+
+    private static void testFastJson2() {
+        var user = randomUser();
+
+        var json = com.alibaba.fastjson2.JSON.toJSONString(user);
+
+        System.out.println("json = \n" + json);
+
+        var deser_user = com.alibaba.fastjson2.JSON.parseObject(json, User.class);
 
         System.out.println("deser_user = \n" + deser_user);
     }

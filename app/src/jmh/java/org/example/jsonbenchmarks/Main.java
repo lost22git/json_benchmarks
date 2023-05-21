@@ -138,7 +138,7 @@ public class Main {
     // ============== FastJson
 
     static SerializeConfig FASTJSON_SER_CONFIG = new SerializeConfig(true);
-    static ParserConfig FAST_DESER_CONFIG = new ParserConfig(true);
+    static ParserConfig FASTJSON_DESER_CONFIG = new ParserConfig(true);
 
     @Benchmark
     public void fastjson_serialize(Blackhole blackhole) {
@@ -151,6 +151,18 @@ public class Main {
         // var user = com.alibaba.fastjson.JSON.parseObject(JSON, User.class,
         // FAST_DESER_CONFIG);
         blackhole.consume(com.alibaba.fastjson.JSON.parseObject(JSON, User.class));
+    }
+
+    // ============== FastJson2
+
+    @Benchmark
+    public void fastjson2_serialize(Blackhole blackhole) {
+        blackhole.consume(com.alibaba.fastjson2.JSON.toJSONString(USER));
+    }
+
+    @Benchmark
+    public void fastjson2_deserialize(Blackhole blackhole) {
+        blackhole.consume(com.alibaba.fastjson2.JSON.parseObject(JSON, User.class));
     }
 
     // ============== Gson

@@ -15,6 +15,8 @@ dependencies {
   runtimeOnly(libs.javassist)
   // FastJson
   implementation(libs.fastjson)
+  // FastJson2
+  implementation(libs.fastjson2)
   // Gson
   implementation(libs.gson)
   // Moshi

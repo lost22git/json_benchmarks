@@ -1,9 +1,10 @@
 [versions]
-avaje-jsonb = "1.4"
+avaje-jsonb = "1.5"
 easyrandom = "5.0.0"
-fastjson = "2.0.27"
+fastjson = "2.0.32"
+fastjson2 = "2.0.32"
 gson = "2.10.1"
-jackson = "2.15.0-rc2"
+jackson = "2.15.1"
 javassist = "3.29.2-GA"
 jmh = "1.36"
 jsonb = "3.0.0"
@@ -11,8 +12,8 @@ jsoniter = "0.9.23"
 logback = "1.2.11"
 micronaut = "3.8.8"
 micronaut-plugin = "3.7.7"
-moshi = "1.14.0"
-plugin-jmh = "0.7.0"
+moshi = "1.15.0"
+plugin-jmh = "0.7.1"
 plugin-jmhReport = "0.9.0"
 plugin-version-catalog-update = "0.8.0"
 plugin-versions = "0.46.0"
@@ -25,6 +26,7 @@ avaje-jsonb = { module = "io.avaje:avaje-jsonb", version.ref = "avaje-jsonb" }
 avaje-jsonb-generator = { module = "io.avaje:avaje-jsonb-generator", version.ref = "avaje-jsonb" }
 easyrandom-core = { module = "org.jeasy:easy-random-core", version.ref = "easyrandom" }
 fastjson = { module = "com.alibaba:fastjson", version.ref = "fastjson" }
+fastjson2 = { module = "com.alibaba.fastjson2:fastjson2", version.ref = "fastjson2" }
 gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
 jackson-annotations = { module = "com.fasterxml.jackson.core:jackson-annotations", version.ref = "jackson" }
 jackson-jsr310 = { module = "com.fasterxml.jackson.datatype:jackson-datatype-jsr310", version.ref = "jackson" }
